@@ -1,24 +1,27 @@
 package com.yourname.pricecomparator.service;
 
-import com.yourname.pricecomparator.controller.dto.BascketDTO;
-import com.yourname.pricecomparator.controller.dto.BasketResponseDTO;
-import com.yourname.pricecomparator.controller.dto.ProductItemDTO;
-import com.yourname.pricecomparator.controller.dto.StoreGroupDTO;
+import com.yourname.pricecomparator.adapter.mapper.DiscountMapper;
+import com.yourname.pricecomparator.controller.dto.*;
+import com.yourname.pricecomparator.model.Discount;
 import com.yourname.pricecomparator.model.ProductPrice;
-import com.yourname.pricecomparator.port.BascketServicePort;
+import com.yourname.pricecomparator.port.ShoppingServicePort;
+import com.yourname.pricecomparator.repository.DiscountRepository;
 import com.yourname.pricecomparator.repository.ProductPriceRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
-public class BascketService implements BascketServicePort {
+public class ShoppingService implements ShoppingServicePort {
     private final ProductPriceRepository productPriceRepository;
+    private final DiscountRepository discountRepository;
     @Override
     public BasketResponseDTO optimizeBasket(BascketDTO bascketDTO) {
         List<ProductPrice> productPrices = new ArrayList<>();
@@ -51,6 +54,14 @@ public class BascketService implements BascketServicePort {
 
         // 4. Returnăm DTO final
         return new BasketResponseDTO(storeGroups, totalCost);
+    }
+
+    public List<DiscountDTO> getTopDiscountDTOs(int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        return discountRepository.findAllByOrderByPercentageOfDiscountDesc(pageable)
+                .stream()
+                .map(DiscountMapper::createFrom)
+                .toList();
     }
 
 }

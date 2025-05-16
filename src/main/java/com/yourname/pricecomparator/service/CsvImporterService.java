@@ -21,16 +21,22 @@ public class CsvImporterService implements CsvImporterPort {
     private final ProductPriceRepository productPriceRepository;
     private final CsvDataPort csvDataPort;
 
-    public void importAll() throws IOException
-    {
-        try{
+    @Override
+    public void importAll() throws IOException {
+        try {
+
+            productPriceRepository.deleteAll();
+            discountRepository.deleteAll();
+
             List<ProductPrice> productPrices = csvDataPort.loadPrices(Paths.get("src/main/resources/data/prices"));
             productPriceRepository.saveAll(productPrices);
+
             List<Discount> discounts = csvDataPort.loadDiscounts(Paths.get("src/main/resources/data/discounts"));
             discountRepository.saveAll(discounts);
-        }catch(Exception e)
-        {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -1,0 +1,31 @@
+package com.yourname.pricecomparator.controller;
+
+import com.yourname.pricecomparator.controller.dto.BascketDTO;
+import com.yourname.pricecomparator.controller.dto.BasketResponseDTO;
+import com.yourname.pricecomparator.controller.dto.DiscountDTO;
+import com.yourname.pricecomparator.port.ShoppingServicePort;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/bascket")
+@RequiredArgsConstructor
+public class ShoppingController {
+    private final ShoppingServicePort shoppingServicePort;
+    @PostMapping("/optimize")
+    public ResponseEntity<BasketResponseDTO> optimizeBasket(@Valid @RequestBody BascketDTO bascketDTO )
+    {
+        BasketResponseDTO result = shoppingServicePort.optimizeBasket(bascketDTO);
+        return ResponseEntity.ok(result);
+    }
+    @PostMapping("/best")
+    public ResponseEntity<List<DiscountDTO>> getTopDiscounts(@RequestParam(defaultValue = "5") int limit) {
+        List<DiscountDTO> topDiscounts = shoppingServicePort.getTopDiscountDTOs(limit);
+        return ResponseEntity.ok(topDiscounts);
+    }
+
+}
