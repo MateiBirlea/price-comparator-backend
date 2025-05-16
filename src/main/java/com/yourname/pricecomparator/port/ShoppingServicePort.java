@@ -10,4 +10,5 @@ import java.util.List;
 public interface ShoppingServicePort {
     public BasketResponseDTO optimizeBasket(BascketDTO bascketDTO);
     public List<DiscountDTO> getTopDiscountDTOs(int limit);
+    public List<DiscountDTO> getNewDiscounts();
 }

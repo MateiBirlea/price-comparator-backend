@@ -108,6 +108,7 @@ public class CsvDataLoader implements CsvDataPort {
                                         .store(store)
                                         .fromDate(LocalDate.parse(parts[6]))
                                         .toDate(LocalDate.parse(parts[7]))
+                                        .importedDate(date)
                                         .percentageOfDiscount(Integer.parseInt(parts[8]))
                                         .build();
                                 discounts.add(discount);

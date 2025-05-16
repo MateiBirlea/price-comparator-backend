@@ -63,5 +63,11 @@ public class ShoppingService implements ShoppingServicePort {
                 .map(DiscountMapper::createFrom)
                 .toList();
     }
+    public List<DiscountDTO> getNewDiscounts(){
+        return discountRepository.findNewDiscountsAddedInLast24h()
+                .stream()
+                .map(DiscountMapper::createFrom)
+                .toList();
+    }
 
 }

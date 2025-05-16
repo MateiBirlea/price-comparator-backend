@@ -25,5 +25,6 @@ public class Discount {
     private String store;
     private LocalDate fromDate;
     private LocalDate toDate;
+    private LocalDate importedDate;
     private int percentageOfDiscount;
 }

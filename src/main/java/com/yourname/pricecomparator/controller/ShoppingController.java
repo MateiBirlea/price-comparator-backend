@@ -27,5 +27,11 @@ public class ShoppingController {
         List<DiscountDTO> topDiscounts = shoppingServicePort.getTopDiscountDTOs(limit);
         return ResponseEntity.ok(topDiscounts);
     }
+    @PostMapping("/new")
+    public ResponseEntity<List<DiscountDTO>> getNewestDiscounts()
+    {
+        List<DiscountDTO> result = shoppingServicePort.getNewDiscounts();
+        return ResponseEntity.ok(result);
+    }
 
 }
