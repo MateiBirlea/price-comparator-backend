@@ -46,5 +46,11 @@ public class ShoppingController {
         List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByCategory(category);
         return ResponseEntity.ok(result);
     }
+    @PostMapping("/price/brand")
+    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByBrand(@RequestParam String brand)
+    {
+        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByBrand(brand);
+        return ResponseEntity.ok(result);
+    }
 
 }

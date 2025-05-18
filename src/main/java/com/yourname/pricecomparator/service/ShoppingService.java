@@ -104,5 +104,23 @@ public class ShoppingService implements ShoppingServicePort {
                 .toList();
         return result;
     }
+    public List<ProductPriceDTO> getPriceHistoryByBrand(String brand)
+    {
+        List<ProductPrice> allPrices = productPriceRepository.findByBrand(brand);
+        Map<String,List<PricePointDTO>> grouped = allPrices.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                ProductPrice::getProductName,
+                                Collectors.mapping(
+                                        p-> new PricePointDTO(p.getPrice(),p.getDate()),
+                                        Collectors.toList()
+                                )
+                        )
+                );
+        List<ProductPriceDTO> result = grouped.entrySet().stream()
+                .map(entry-> new ProductPriceDTO(entry.getKey(),entry.getValue()))
+                .toList();
+        return result;
+    }
 
 }

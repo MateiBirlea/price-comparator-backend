@@ -13,5 +13,6 @@ public interface ProductPriceRepository extends JpaRepository<ProductPrice,Long>
     Optional<ProductPrice> findTopByProductNameAndDateOrderByPriceAsc(String productName, LocalDate date);
     List<ProductPrice> findByStore(String store);
     List<ProductPrice> findByProductCategory(String productCategory);
+    List<ProductPrice>findByBrand(String brand);
 
 }
