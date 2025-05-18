@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -68,6 +69,22 @@ public class ShoppingService implements ShoppingServicePort {
                 .stream()
                 .map(DiscountMapper::createFrom)
                 .toList();
+    }
+    public List<ProductPriceDTO> getPriceHistoryByStore(String store)
+    {
+        List<ProductPrice> allPrices = productPriceRepository.findByStore(store);
+        Map<String,List<PricePointDTO>> grouped = allPrices.stream()
+                .collect(Collectors.groupingBy(
+                        ProductPrice::getProductName,
+                        Collectors.mapping(
+                                p->new PricePointDTO(p.getPrice(),p.getDate()),
+                                        Collectors.toList()
+                        )
+                ));
+        List<ProductPriceDTO> result = grouped.entrySet().stream()
+                .map(entry ->new ProductPriceDTO(entry.getKey(),entry.getValue()))
+                .toList();
+        return result;
     }
 
 }

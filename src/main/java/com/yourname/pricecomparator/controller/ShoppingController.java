@@ -3,6 +3,7 @@ package com.yourname.pricecomparator.controller;
 import com.yourname.pricecomparator.controller.dto.BascketDTO;
 import com.yourname.pricecomparator.controller.dto.BasketResponseDTO;
 import com.yourname.pricecomparator.controller.dto.DiscountDTO;
+import com.yourname.pricecomparator.controller.dto.ProductPriceDTO;
 import com.yourname.pricecomparator.port.ShoppingServicePort;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -31,6 +32,12 @@ public class ShoppingController {
     public ResponseEntity<List<DiscountDTO>> getNewestDiscounts()
     {
         List<DiscountDTO> result = shoppingServicePort.getNewDiscounts();
+        return ResponseEntity.ok(result);
+    }
+    @PostMapping("/price")
+    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByStore(@RequestParam String store)
+    {
+        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByStore(store);
         return ResponseEntity.ok(result);
     }
 
