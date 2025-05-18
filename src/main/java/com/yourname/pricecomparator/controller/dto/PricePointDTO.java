@@ -12,4 +12,5 @@ import java.time.LocalDate;
 public class PricePointDTO {
     private double price;
     private LocalDate date;
+    private String store;
 }

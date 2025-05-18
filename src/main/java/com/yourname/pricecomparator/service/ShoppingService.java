@@ -77,7 +77,7 @@ public class ShoppingService implements ShoppingServicePort {
                 .collect(Collectors.groupingBy(
                         ProductPrice::getProductName,
                         Collectors.mapping(
-                                p->new PricePointDTO(p.getPrice(),p.getDate()),
+                                p->new PricePointDTO(p.getPrice(),p.getDate(),p.getStore()),
                                         Collectors.toList()
                         )
                 ));
@@ -94,7 +94,7 @@ public class ShoppingService implements ShoppingServicePort {
                         Collectors.groupingBy(
                                 ProductPrice::getProductName,
                                 Collectors.mapping(
-                                        p-> new PricePointDTO(p.getPrice(),p.getDate()),
+                                        p-> new PricePointDTO(p.getPrice(),p.getDate(),p.getStore()),
                                         Collectors.toList()
                                 )
                         )
@@ -112,7 +112,7 @@ public class ShoppingService implements ShoppingServicePort {
                         Collectors.groupingBy(
                                 ProductPrice::getProductName,
                                 Collectors.mapping(
-                                        p-> new PricePointDTO(p.getPrice(),p.getDate()),
+                                        p-> new PricePointDTO(p.getPrice(),p.getDate(),p.getStore()),
                                         Collectors.toList()
                                 )
                         )

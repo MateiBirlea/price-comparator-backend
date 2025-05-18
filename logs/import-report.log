@@ -502,3 +502,27 @@ Finished profi_discounts_2025-05-01.csv in 3ms | Valid: 10 | Invalid: 0
 --------------------------------------------------
 Finished profi_discounts_2025-05-08.csv in 1ms | Valid: 13 | Invalid: 0
 --------------------------------------------------
+Finished kaufland_2025-05-01.csv in 4ms | Valid: 25 | Invalid: 0
+--------------------------------------------------
+Finished kaufland_2025-05-08.csv in 1ms | Valid: 25 | Invalid: 0
+--------------------------------------------------
+Finished lidl_2025-05-01.csv in 1ms | Valid: 20 | Invalid: 0
+--------------------------------------------------
+Finished lidl_2025-05-08.csv in 1ms | Valid: 25 | Invalid: 0
+--------------------------------------------------
+Finished profi_2025-05-01.csv in 1ms | Valid: 20 | Invalid: 0
+--------------------------------------------------
+Finished profi_2025-05-08.csv in 1ms | Valid: 25 | Invalid: 0
+--------------------------------------------------
+Finished kaufland_discounts_2025-05-01.csv in 2ms | Valid: 12 | Invalid: 0
+--------------------------------------------------
+Finished kaufland_discounts_2025-05-08.csv in 1ms | Valid: 12 | Invalid: 0
+--------------------------------------------------
+Finished lidl_discounts_2025-05-01.csv in 2ms | Valid: 20 | Invalid: 0
+--------------------------------------------------
+Finished lidl_discounts_2025-05-08.csv in 1ms | Valid: 13 | Invalid: 0
+--------------------------------------------------
+Finished profi_discounts_2025-05-01.csv in 1ms | Valid: 10 | Invalid: 0
+--------------------------------------------------
+Finished profi_discounts_2025-05-08.csv in 1ms | Valid: 13 | Invalid: 0
+--------------------------------------------------
