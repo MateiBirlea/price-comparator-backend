@@ -34,10 +34,16 @@ public class ShoppingController {
         List<DiscountDTO> result = shoppingServicePort.getNewDiscounts();
         return ResponseEntity.ok(result);
     }
-    @PostMapping("/price")
+    @PostMapping("/price/store")
     public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByStore(@RequestParam String store)
     {
         List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByStore(store);
+        return ResponseEntity.ok(result);
+    }
+    @PostMapping("/price/category")
+    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByCategory(@RequestParam String category)
+    {
+        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByCategory(category);
         return ResponseEntity.ok(result);
     }
 

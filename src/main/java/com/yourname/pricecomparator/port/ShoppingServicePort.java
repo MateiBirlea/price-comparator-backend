@@ -13,4 +13,5 @@ public interface ShoppingServicePort {
     public List<DiscountDTO> getTopDiscountDTOs(int limit);
     public List<DiscountDTO> getNewDiscounts();
     public List<ProductPriceDTO> getPriceHistoryByStore(String store);
+    public List<ProductPriceDTO> getPriceHistoryByCategory(String category);
 }
