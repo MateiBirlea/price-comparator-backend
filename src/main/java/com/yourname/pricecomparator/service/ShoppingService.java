@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -122,5 +123,44 @@ public class ShoppingService implements ShoppingServicePort {
                 .toList();
         return result;
     }
+    public List<BestDealDTO> getBestPricesByDate(LocalDate date) {
+        List<ProductPrice> productPrices = productPriceRepository.findByDate(date);
+
+        Map<String, List<ProductDealDTO>> grouped = productPrices.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                ProductPrice::getProductName,
+                                Collectors.mapping(
+                                        p -> {
+                                            double price = p.getPrice() * p.getPackageQuantity();
+                                            return new ProductDealDTO(p.getPackageQuantity(), p.getPrice(), price, p.getStore());
+                                        },
+                                        Collectors.toList()
+                                )
+                        )
+                );
+
+        // Pentru fiecare grup de produse (pe numele produsului)
+        List<BestDealDTO> result = grouped.entrySet().stream()
+                .map(entry -> {
+                    // Selectează produsul cu cel mai mic preț
+                    ProductDealDTO bestDeal = entry.getValue().stream()
+                            .min(Comparator.comparingDouble(ProductDealDTO::getTotal))  // Compară prețurile totale
+                            .orElseThrow(() -> new RuntimeException("No products found for " + entry.getKey()));
+
+                    // Crează BestDealDTO cu prețul minim și magazinul corespunzător
+                    return new BestDealDTO(
+                            entry.getKey(),  // Numele produsului
+                            bestDeal.getTotal(),  // Prețul cel mai mic
+                            bestDeal.getStore(),  // Magazinul cu prețul cel mai mic
+                            entry.getValue()  // Lista completă de produse
+                    );
+                })
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+
 
 }

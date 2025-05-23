@@ -14,5 +14,6 @@ public interface ProductPriceRepository extends JpaRepository<ProductPrice,Long>
     List<ProductPrice> findByStore(String store);
     List<ProductPrice> findByProductCategory(String productCategory);
     List<ProductPrice>findByBrand(String brand);
+    List<ProductPrice>findByDate(LocalDate date);
 
 }

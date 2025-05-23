@@ -1,11 +1,9 @@
 package com.yourname.pricecomparator.port;
 
-import com.yourname.pricecomparator.controller.dto.BascketDTO;
-import com.yourname.pricecomparator.controller.dto.BasketResponseDTO;
-import com.yourname.pricecomparator.controller.dto.DiscountDTO;
-import com.yourname.pricecomparator.controller.dto.ProductPriceDTO;
+import com.yourname.pricecomparator.controller.dto.*;
 import com.yourname.pricecomparator.model.Discount;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ShoppingServicePort {
@@ -15,4 +13,5 @@ public interface ShoppingServicePort {
     public List<ProductPriceDTO> getPriceHistoryByStore(String store);
     public List<ProductPriceDTO> getPriceHistoryByCategory(String category);
     public List<ProductPriceDTO> getPriceHistoryByBrand(String brand);
+    public List <BestDealDTO> getBestPricesByDate(LocalDate date);
 }

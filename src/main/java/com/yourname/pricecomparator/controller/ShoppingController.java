@@ -1,15 +1,13 @@
 package com.yourname.pricecomparator.controller;
 
-import com.yourname.pricecomparator.controller.dto.BascketDTO;
-import com.yourname.pricecomparator.controller.dto.BasketResponseDTO;
-import com.yourname.pricecomparator.controller.dto.DiscountDTO;
-import com.yourname.pricecomparator.controller.dto.ProductPriceDTO;
+import com.yourname.pricecomparator.controller.dto.*;
 import com.yourname.pricecomparator.port.ShoppingServicePort;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -50,6 +48,12 @@ public class ShoppingController {
     public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByBrand(@RequestParam String brand)
     {
         List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByBrand(brand);
+        return ResponseEntity.ok(result);
+    }
+    @PostMapping("/best/price")
+    public ResponseEntity<List<BestDealDTO>> getBestDealByPriceAndQuantity(@RequestParam LocalDate date)
+    {
+        List<BestDealDTO> result = shoppingServicePort.getBestPricesByDate(date);
         return ResponseEntity.ok(result);
     }
 
