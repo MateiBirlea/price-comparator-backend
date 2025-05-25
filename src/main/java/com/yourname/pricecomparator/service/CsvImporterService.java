@@ -27,10 +27,10 @@ public class CsvImporterService implements CsvImporterPort {
 
             productPriceRepository.deleteAll();
             discountRepository.deleteAll();
-
+            //load la preturi
             List<ProductPrice> productPrices = csvDataPort.loadPrices(Paths.get("src/main/resources/data/prices"));
             productPriceRepository.saveAll(productPrices);
-
+            ///load la discount
             List<Discount> discounts = csvDataPort.loadDiscounts(Paths.get("src/main/resources/data/discounts"));
             discountRepository.saveAll(discounts);
 

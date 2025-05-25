@@ -21,36 +21,18 @@ public class ShoppingController {
         BasketResponseDTO result = shoppingServicePort.optimizeBasket(bascketDTO);
         return ResponseEntity.ok(result);
     }
-    @PostMapping("/best")
-    public ResponseEntity<List<DiscountDTO>> getTopDiscounts(@RequestParam(defaultValue = "5") int limit) {
+    @GetMapping("/best")
+    public ResponseEntity<List<DiscountDTO>> getTopDiscounts(@RequestParam int limit) {
         List<DiscountDTO> topDiscounts = shoppingServicePort.getTopDiscountDTOs(limit);
         return ResponseEntity.ok(topDiscounts);
     }
-    @PostMapping("/new")
+    @GetMapping("/new")
     public ResponseEntity<List<DiscountDTO>> getNewestDiscounts()
     {
         List<DiscountDTO> result = shoppingServicePort.getNewDiscounts();
         return ResponseEntity.ok(result);
     }
-    @PostMapping("/price/store")
-    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByStore(@RequestParam String store)
-    {
-        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByStore(store);
-        return ResponseEntity.ok(result);
-    }
-    @PostMapping("/price/category")
-    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByCategory(@RequestParam String category)
-    {
-        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByCategory(category);
-        return ResponseEntity.ok(result);
-    }
-    @PostMapping("/price/brand")
-    public ResponseEntity<List<ProductPriceDTO>> getPriceHistoryByBrand(@RequestParam String brand)
-    {
-        List<ProductPriceDTO> result = shoppingServicePort.getPriceHistoryByBrand(brand);
-        return ResponseEntity.ok(result);
-    }
-    @PostMapping("/best/price")
+    @GetMapping("/best/price")
     public ResponseEntity<List<BestDealDTO>> getBestDealByPriceAndQuantity(@RequestParam LocalDate date)
     {
         List<BestDealDTO> result = shoppingServicePort.getBestPricesByDate(date);
